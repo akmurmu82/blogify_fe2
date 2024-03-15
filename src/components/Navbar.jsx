@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Flex,
   Text,
@@ -10,11 +10,13 @@ import {
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { AllContext } from "../context/AllContext";
 
 function Navbar() {
   const [visible, setVisible] = useState(true);
   const { isOpen, onToggle } = useDisclosure();
-
+  const {isLoggedIn} = useContext(AllContext);
+console.log(isLoggedIn);
   function handleScroll() {
     const triggerPosition = 100;
     const scrollPosition = window.scrollY;
@@ -31,11 +33,11 @@ function Navbar() {
     );
   }
   let navlinks = [
-    { title: "HOME", link: "http://localhost:3000/" },
-    { title: "BLOG", link: "http://localhost:3000/" },
-    { title: "SIGNUP", link: "http://localhost:3000/signup" },
-    { title: "AUTHOR", link: "http://localhost:3000/" },
-    { title: "ACCOUNT", link: "http://localhost:3000/" },
+    { title: "HOME", link: "" },
+    { title: "BLOG", link: "blog" },
+    { title: "AUTHOR", link: "" },
+    { title: "ACCOUNT", link: "account" },
+    { title: `${isLoggedIn ? "LOGIN" : "SIGNUP"}`, link: "signup" },
   ];
 
   window.addEventListener("scroll", handleScroll);
